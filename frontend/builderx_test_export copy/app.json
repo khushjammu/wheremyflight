@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "sdkVersion": "26.0.0",
+    "name": "Where my Flight?",
+    "icon": "../icon/stolen.png",
+    "version": "1.0.0",
+    "slug": "where-my-flight",
+    "ios": {
+      "bundleIdentifier": "com.khush.wheremyflight"
+    }
+  }
+}
