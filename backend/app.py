@@ -21,8 +21,6 @@ def get_flights():
 	for entry in a['carriers']:
 		if entry['flightNo'] == flight_code or flight_code in [ i['flightNo'] for i in entry['slaves']]: correct_entry = entry
 
-
-
 	if bool(correct_entry):
 		response = {
 			'status': 'success',
