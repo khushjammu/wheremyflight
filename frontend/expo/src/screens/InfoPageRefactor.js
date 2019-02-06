@@ -30,7 +30,8 @@ export default class InfoPageRefactor extends Component {
       date: this.props.navigation.getParam("date","NO-D"),
       arrival_time: this.props.navigation.getParam("arrival_time","NO-AR"),
       belt_no: this.props.navigation.getParam("belt_no","NO-BELT"),
-      status: this.props.navigation.getParam("status","NO-STAT")
+      status: this.props.navigation.getParam("status","NO-STAT"),
+      type: this.props.navigation.getParam("type","NO-TYPE")
     }
   }
 
@@ -43,6 +44,30 @@ export default class InfoPageRefactor extends Component {
       return (
         <Text style={styles.info_wrapper_status_Positive}>{this.state.status}</Text>
       ) 
+    }
+  }
+
+  handleIconPlane() {
+    if (this.state.type === "arrival") {
+      return(
+        <Icon name="flight-land" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
+      )
+    } else if (this.state.type === "departure") {
+      return(
+        <Icon name="flight-takeoff" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
+      )
+    }
+  }
+
+  handleIconBeltOrGate() {
+    if (this.state.type === "arrival") {
+      return(
+        <Icon name="card-travel" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
+      )
+    } else if (this.state.type === "departure") {
+      return(
+        <Icon name="room" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
+      )
     }
   }
 
@@ -87,7 +112,7 @@ export default class InfoPageRefactor extends Component {
                     <Text style={styles.info_wrapper_data_item_text}>{this.state.terminal}</Text>
                   </View>
                   <View style={styles.info_wrapper_data_item}>
-                    <Icon name="access-time" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
+                    <Icon name="today" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
                     <Text style={styles.info_wrapper_data_item_text}>{this.state.date}</Text>
                   </View>
                 </View>
@@ -96,14 +121,14 @@ export default class InfoPageRefactor extends Component {
 
                 <View style={styles.info_wrapper_data_col}>
                   <View style={styles.info_wrapper_data_item}>
-                    <Icon name="flight-land" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
+                    {this.handleIconPlane()}
                     <Text style={styles.info_wrapper_data_item_text}>{this.state.arrival_time}</Text>
                   </View>
 
-                  <View style={styles.info_wrapper_data_item}>
-                    <Icon name="card-travel" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
-                    <Text style={styles.info_wrapper_data_item_text}>{this.state.belt_no}</Text>
-                  </View>
+                <View style={styles.info_wrapper_data_item}>
+                  {this.handleIconBeltOrGate()}
+                  <Text style={styles.info_wrapper_data_item_text}>{this.state.belt_no}</Text>
+                </View>
                 </View>
               </View>
 
