@@ -1,6 +1,6 @@
 import React from "react";
-import { YellowBox } from "react-native";
-import { Font } from "expo";
+import { YellowBox, View, Image, Text } from "react-native";
+import { Font, Asset, SplashScreen, AppLoading } from "expo";
 import IntroRefactor from "./src/screens/IntroRefactor";
 import InfoPageRefactor from "./src/screens/InfoPageRefactor"
 import { StackNavigator, DrawerNavigator } from "react-navigation";
@@ -18,6 +18,7 @@ const StackNavigation = StackNavigator(
     initialRouteName: "IntroRefactor"
   }
 );
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -29,15 +30,43 @@ export default class App extends React.Component {
       "Warning: componentWillReceiveProps is deprecated",
       "Warning: componentWillUpdate is deprecated"
     ]);
+    this.loadResources = this.loadResources.bind(this);
   }
-  async componentDidMount() {
+  componentDidMount() {
+  // async componentDidMount() {
+    // await Font.loadAsync({
+    //   "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf"),
+    //   "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),
+    // });
+
+    // this.setState({ fontLoaded: true });
+    // SplashScreen.preventAutoHide();
+  }
+
+  async loadResources() {
+    // const images = [
+    //   require()
+    // ];
     await Font.loadAsync({
-      "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf")
+      "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf"),
+      "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),
     });
 
     this.setState({ fontLoaded: true });
   }
   render() {
-    return this.state.fontLoaded ? <StackNavigation /> : <Expo.AppLoading />;
+    if (this.state.fontLoaded) {
+      return(
+        <StackNavigation />
+      )
+    } else {
+      return (
+        <View style={{ flex: 1 }}>
+          <Image source={require('./src/assets/splash.png')} onLoad={this.loadResources}/>
+        </View>
+      )
+      
+    }
+
   }
 }

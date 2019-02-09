@@ -14,7 +14,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import DatePicker from "react-native-datepicker";
 import Button from 'react-native-button'
 
-import {Audio} from 'expo';
+import {AppLoading, Font} from 'expo';
 
 import SearchButtonSVG from "../symbols/SearchButton";
 
@@ -28,9 +28,10 @@ export default class IntroRefactor extends Component {
       date: new Date(), 
       minDate: date_fns.format(date_fns.endOfYesterday(), 'YYYY-MM-DD'),
       maxDate: date_fns.format(date_fns.endOfTomorrow(), 'YYYY-MM-DD'),
-      appState: AppState.currentState};
+      appState: AppState.currentState,
+    };
     this._setDate = this._setDate.bind(this);
-    this.myRef = React.createRef(); 
+    this.myRef = React.createRef();  
   }
 
   _setDate(newDate) {
@@ -43,7 +44,7 @@ export default class IntroRefactor extends Component {
     if (this.state.text != "") {
       // var url ="http://178.128.25.234:5000/get_flights?date=" +date_fns.format(this.state.date,"YYYYMMDD") +"&flight_code=" +this.state.text;
 
-    var url ="http://128.199.214.139:5000/get_flights?date=" +date_fns.format(this.state.date,"YYYYMMDD") +"&flight_code=" +this.state.text;
+    var url ="http://192.168.1.126:5000/get_flights?date=" +date_fns.format(this.state.date,"YYYYMMDD") +"&flight_code=" +this.state.text;
 
       fetch(url)
         .then(res => res.json())
@@ -58,7 +59,8 @@ export default class IntroRefactor extends Component {
                 date: new Intl.DateTimeFormat('en-GB', {month: "2-digit", day: "2-digit"}).format(new Date(this.state.date)),
                 arrival_time: res['data']["arrival"]["estimatedTime"] != "-" ? res['data']["arrival"]["estimatedTime"] : res['data']["arrival"]["scheduledTime"],
                 belt_no: res['data']["arrival"]["belt"],
-                status: res['data']["arrival"]["status"] != "-" ? res['data']["arrival"]["status"] : "Scheduled"
+                status: res['data']["arrival"]["status"] != "-" ? res['data']["arrival"]["status"] : "Scheduled",
+                type: 'arrival'
               });
             } else if (res['data']['direction'] === 'departure') {
               this.props.navigation.navigate("InfoPageRefactor", {
@@ -68,8 +70,10 @@ export default class IntroRefactor extends Component {
                 terminal: "T" + res['data']["departure"]["terminal"],
                 date: new Intl.DateTimeFormat('en-GB', {month: "2-digit", day: "2-digit"}).format(new Date(this.state.date)),
                 arrival_time: res['data']["departure"]["estimatedTime"] != "-" ? res['data']["departure"]["estimatedTime"] : res['data']["departure"]["scheduledTime"],
-                belt_no: res['data']["departure"]["belt"],
-                status: res['data']["departure"]["status"] != "-" ? res['data']["departure"]["status"] : "Scheduled"
+                // belt_no: res['data']["departure"]["belt"],
+                belt_no: res['data']["departure"]["gate"],
+                status: res['data']["departure"]["status"] != "-" ? res['data']["departure"]["status"] : "Scheduled",
+                type: 'departure'
               });
             } else {
               Alert.alert(
@@ -96,16 +100,14 @@ export default class IntroRefactor extends Component {
         console.log("error caught!")
         console.log(err)
 
-        if (err == "Network request failed") {
-          Alert.alert(
-              'Error!',
-              "No wifi connection detected! Please ensure device is connected to internet.",
-              [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-              ],
-              { cancelable: false }
-            );
-        }
+        Alert.alert(
+            'Error!',
+            "Couldn't connect to server! Please ensure device is connected to internet.",
+            [
+              {text: 'OK', onPress: () => console.log('OK Pressed')},
+            ],
+            { cancelable: false }
+          );
       });
 
     } else {
@@ -142,7 +144,7 @@ export default class IntroRefactor extends Component {
         <ImageBackground style={styles.background} source={require("../assets/Gradient_t9eqeMB.png")}>
 
           <View style={styles.search}>
-            <Text style={styles.search_Box_Heading}>Enter flight #:</Text>
+            <Text style={styles.search_Box_Title}>Where my flight??</Text>
 
             <View style={styles.search_Box_Rectangle}>
               <TextInput
@@ -211,12 +213,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: hp(10), // use marginTop so that other components are affected: https://stackoverflow.com/questions/4036176/css-top-vs-margin-top
   },
-  search_Box_Heading: {
-    // backgroundColor: "transparent",
+  search_Box_Title: {
     color: "rgba(255,255,255,1)",
-    fontSize: 18,
-    fontFamily: "OpenSans-SemiBold",
-    paddingBottom: hp(0.75)
+    fontSize: 36,
+    fontFamily: "OpenSans-SemiBoldItalic",
+    paddingBottom: hp(2)
   },
   search_Box_Rectangle: {
     height: hp(12),

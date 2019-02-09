@@ -6,8 +6,12 @@
     "version": "1.0.0",
     "slug": "where-my-flight",
     "ios": {
-      "bundleIdentifier": "com.khush.wheremyflight"
+      "bundleIdentifier": "com.khushjammu.wheremyflight"
     },
-    "description": "where my flight? 2.0"
+    "description": "where my flight? 2.0",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "cover"
+    }
   }
 }
