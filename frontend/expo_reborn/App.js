@@ -3,21 +3,31 @@ import { YellowBox, View, Image, Text } from "react-native";
 import { Font, Asset, SplashScreen, AppLoading } from "expo";
 import IntroRefactor from "./src/screens/IntroRefactor";
 import InfoPageRefactor from "./src/screens/InfoPageRefactor"
-import { StackNavigator, DrawerNavigator } from "react-navigation";
-const StackNavigation = StackNavigator(
+import { createStackNavigator, createAppContainer  } from "react-navigation";
+// const StackNavigation = createStackNavigator({
+//     {
+//       IntroRefactor: IntroRefactor
+//       InfoPageRefactor: InfoPageRefactor
+//     },
+//     {
+//       headerMode: "none",
+//       initialRouteName: "IntroRefactor"
+//     }
+// });
+
+const StackNavigation = createStackNavigator(
   {
-    IntroRefactor: {
-      screen: IntroRefactor
-    },
-    InfoPageRefactor: {
-      screen: InfoPageRefactor
-    }
+    IntroRefactor: IntroRefactor,
+    InfoPageRefactor: InfoPageRefactor
   },
   {
-    headerMode: "none",
-    initialRouteName: "IntroRefactor"
+    initialRouteName: "IntroRefactor",
+    headerMode: "none"
   }
 );
+
+const AppContainer = createAppContainer(StackNavigation);
+
 
 export default class App extends React.Component {
   constructor() {
@@ -32,16 +42,6 @@ export default class App extends React.Component {
     ]);
     this.loadResources = this.loadResources.bind(this);
   }
-  componentDidMount() {
-  // async componentDidMount() {
-    // await Font.loadAsync({
-    //   "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf"),
-    //   "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),
-    // });
-
-    // this.setState({ fontLoaded: true });
-    // SplashScreen.preventAutoHide();
-  }
 
   async loadResources() {
     require('./src/assets/Gradient_t9eqeMB.png')
@@ -55,7 +55,7 @@ export default class App extends React.Component {
   render() {
     if (this.state.fontLoaded) {
       return(
-        <StackNavigation />
+        <AppContainer />
       )
     } else {
       return (
@@ -68,3 +68,4 @@ export default class App extends React.Component {
 
   }
 }
+
