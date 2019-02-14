@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import Icon from "@builderx/icons";
+import Icon from "../libraries/icon.js";
 import { SearchBar } from "react-native-elements";
-var js_lib = require("../../date_fns.min.js");
+var js_lib = require("../libraries/date_fns.min.js");
 
 import PaperPlaneSVG from "../symbols/PaperPlane";
 
