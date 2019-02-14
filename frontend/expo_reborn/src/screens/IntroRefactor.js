@@ -104,7 +104,6 @@ export default class IntroRefactor extends Component {
 
   _navigateToArrivals(res, flag){
     if (flag === 'arrival') {
-      console.log(res['data']["arrival"]["status"] != "-" ? res['data']["arrival"]["status"] : "Scheduled");
       this.props.navigation.navigate("InfoPageRefactor", {
         flight_num: this.state.text, 
         origin: res['data']["arrival"]["from"],
@@ -117,7 +116,6 @@ export default class IntroRefactor extends Component {
         type: 'arrival'
       });
     } else if (flag === 'departure') {
-      console.log(res['data']["departure"]["status"] != "-" ? res['data']["departure"]["status"] : "Scheduled");
       this.props.navigation.navigate("InfoPageRefactor", {
         flight_num: this.state.text, 
         origin: "Singapore",
