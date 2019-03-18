@@ -1,11 +1,15 @@
 import requests as r
 from flask import Flask, request, jsonify
-import json
+import json, datetime
 app = Flask(__name__)
 
 @app.route("/", methods = ['GET'])
 def hello():
     return "Hello World!"
+
+@app.route("/shehacks")
+def shehacks():
+	return "shehacks rules!!"
 
 def clean_data(item):
 	for field in item:
@@ -42,6 +46,19 @@ def check_departures(date, flight_code):
 	return correct_entry
 
 def check_entries(date, flight_code):
+	yesterday = datetime.date.today() + datetime.timedelta(days=-1)
+	today = datetime.date.today()
+	tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+
+	if date == yesterday.strftime("%Y%m%d"):
+		date = "yesterday"
+	elif date == tomorrow.strftime("%Y%m%d"):
+		date = "tomorrow"
+	elif date == today.strftime("%Y%m%d"):
+		date = "today"
+	else:
+		return
+
 	arrivals_status = check_arrivals(date, flight_code)
 	departures_status = check_departures(date, flight_code)
 	return_data = {}
