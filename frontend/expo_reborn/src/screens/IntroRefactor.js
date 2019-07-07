@@ -45,7 +45,7 @@ export default class IntroRefactor extends Component {
     if (this.state.text != "") {
       // var url ="http://178.128.25.234:5000/get_flights?date=" +date_fns.format(this.state.date,"YYYYMMDD") +"&flight_code=" +this.state.text;
 
-    var url ="http://192.168.86.54:5000/get_flights?date=" +date_fns.format(this.state.date,"YYYYMMDD") +"&flight_code=" +this.state.text;
+    var url ="http://api.wheremyflight.khushjammu.com:5000/get_flights?date=" +date_fns.format(this.state.date,"YYYYMMDD") +"&flight_code=" +this.state.text;
 
       fetch(url)
         .then(res => res.json())

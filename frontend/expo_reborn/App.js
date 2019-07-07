@@ -1,9 +1,12 @@
 import React from "react";
-import { YellowBox, View, Image, Text } from "react-native";
+import { YellowBox, View, Image, Text, StyleSheet, ImageBackground } from "react-native";
 import { Font, Asset, SplashScreen, AppLoading } from "expo";
 import IntroRefactor from "./src/screens/IntroRefactor";
 import InfoPageRefactor from "./src/screens/InfoPageRefactor"
+import PayalComp from "./src/screens/Payal"
 import { createStackNavigator, createAppContainer  } from "react-navigation";
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 // const StackNavigation = createStackNavigator({
 //     {
 //       IntroRefactor: IntroRefactor
@@ -48,19 +51,28 @@ export default class App extends React.Component {
     await Font.loadAsync({
       "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf"),
       "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),
+      "OpenSans-Regular": require("./src/assets/fonts/OpenSans-Regular.ttf"),
     });
 
     this.setState({ fontLoaded: true });
   }
+  
+  componentWillMount() {
+    this.loadResources();
+  }
+
   render() {
     if (this.state.fontLoaded) {
       return(
         <AppContainer />
       )
-    } else {
+    } else { 
       return (
         <View style={{ flex: 1 }}>
-          <Image source={require('./src/assets/splash.png')} onLoad={this.loadResources}/>
+      {/* 
+          <ImageBackground style={styles.background} source={require("./src/assets/Gradient_t9eqeMB.png")} onLoad={this.loadResources}>
+          </ImageBackground>
+      */}
         </View>
       )
       
@@ -68,4 +80,11 @@ export default class App extends React.Component {
 
   }
 }
+
+const styles = StyleSheet.create({
+  background: {
+    height: hp(100),
+    width: wp(100),
+  }
+});
 

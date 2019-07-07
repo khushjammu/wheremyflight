@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Where my Flight?",
+    "name": "Where My Flight?",
     "slug": "where-my-flight",
     "description": "where my flight? 2.0",
     "privacy": "public",
@@ -14,7 +14,7 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {

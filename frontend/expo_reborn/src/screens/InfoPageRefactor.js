@@ -112,7 +112,7 @@ export default class InfoPageRefactor extends Component {
                   </View>
                   <View style={styles.info_wrapper_data_item}>
                     <Icon name="today" type="MaterialIcons" size={25} style={styles.info_wrapper_data_item_icon}/>
-                    <Text style={styles.info_wrapper_data_item_text}>{"11/09"}</Text>
+                    <Text style={styles.info_wrapper_data_item_text}>{this.state.date}</Text>
                   </View>
                 </View>
 
