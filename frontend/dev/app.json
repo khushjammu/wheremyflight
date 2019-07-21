@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Where my Flight?", // mandatory for iOS building 
+    "slug": "where-my-flight",
+    "privacy": "public",
+    "sdkVersion": "33.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0", // mandatory for iOS building 
+    "orientation": "portrait",
+    "icon": "./src/assets/icon/Icon.png", // mandatory for iOS building 
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.khushjammu.wheremyflight"
+    }
+  }
+}
