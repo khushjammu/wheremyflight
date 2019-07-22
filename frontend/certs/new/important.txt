@@ -1,9 +1,0 @@
-[19:09:23] Please provide your distribution certificate P12:
-? Path to P12 file: /Users/jammu55048/Desktop/test/new/distri.p12
-? P12 password: [hidden]
-[19:12:34] Please provide the path to your push notification cert P12
-? Path to P12 file: /Users/jammu55048/Desktop/test/new/Certificates_PUSH.p12
-? P12 password: [hidden]
-[19:15:34] Please provide the path to your .mobile provisioning profile
-? Path to your .mobile provisioning Profile /Users/jammu55048/Desktop/test/new/wheremyflight_test_distribution.m
-obileprovision

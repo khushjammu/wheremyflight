@@ -24,6 +24,7 @@ const AppContainer = createAppContainer(StackNavigation);
 export default class App extends React.Component {
   constructor() {
     super();
+    SplashScreen.preventAutoHide();
     this.state = {
       fontLoaded: false
     };
@@ -45,6 +46,7 @@ export default class App extends React.Component {
     });
 
     this.setState({ fontLoaded: true });
+    SplashScreen.hide();
   }
 
   render() {
