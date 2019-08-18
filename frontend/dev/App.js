@@ -24,7 +24,6 @@ const AppContainer = createAppContainer(StackNavigation);
 export default class App extends React.Component {
   constructor() {
     super();
-    SplashScreen.preventAutoHide();
     this.state = {
       fontLoaded: false
     };
@@ -43,10 +42,11 @@ export default class App extends React.Component {
       "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf"),
       "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),
       "OpenSans-Regular": require("./src/assets/fonts/OpenSans-Regular.ttf"),
+      "NewYorkMedium-Regular": require("./src/assets/fonts/NewYorkMedium-Regular.otf"),
+      "NewYorkMedium-RegularItalic": require("./src/assets/fonts/NewYorkMedium-RegularItalic.otf")
     });
 
     this.setState({ fontLoaded: true });
-    SplashScreen.hide();
   }
 
   render() {

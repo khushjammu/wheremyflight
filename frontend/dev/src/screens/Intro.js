@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ImageBackground, TextInput, Alert, Image, AppState, LayoutAnimation, StatusBar } from "react-native";
+import { SplashScreen, View, Text, StyleSheet, ImageBackground, TextInput, Alert, Image, AppState, LayoutAnimation, StatusBar } from "react-native";
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import DatePicker from "react-native-datepicker";
 import Button from 'react-native-button'
-import { AppLoading} from 'expo';
+import { AppLoading, LinearGradient } from 'expo';
 
 import SearchButtonSVG from "../symbols/SearchButton";
 
@@ -141,7 +141,7 @@ export default class Intro extends Component {
         <ImageBackground style={styles.background} source={require("../assets/Gradient_t9eqeMB.png")}>
 
           <View style={styles.search}>
-            <Text style={styles.search_Box_Title}>Where my flight??</Text>
+            <Text style={styles.search_Box_Title}>Where my flight?</Text>
 
             <View style={styles.search_Box_Rectangle}>
               <TextInput
