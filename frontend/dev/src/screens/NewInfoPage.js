@@ -5,7 +5,7 @@ import { SearchBar } from "react-native-elements";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 var date_fns = require("../libraries/date_fns.min.js");
-// import moment from 'moment';
+import moment from 'moment';
 
 
 import Icon from "../libraries/icon.js";
@@ -40,7 +40,7 @@ export default class NewInfoPage extends Component {
     //   "scheduledDate": null,
     //   "scheduledDatetime": "20200107 10:00:00",
     //   "scheduledTime": null,
-    //   "status": "",
+    //   "status": "Retimed",
     //   "terminal": "3",
     //   "to": "Singapore",
     // }
@@ -56,6 +56,8 @@ export default class NewInfoPage extends Component {
     this._handle_estimated_datetime()
     this._handle_luggage_belt()
     this._arrival_or_departure()
+    console.log("post-date processing state")
+    console.log(this.state)
   }
 
 
@@ -73,10 +75,15 @@ export default class NewInfoPage extends Component {
   _handle_estimated_datetime() {
     if (this.state.estimatedDate === "-") {
       this.state.estimatedDate = this.state.scheduledDate
-      this.state.estimatedTime = this.state.scheduledTime
+    } else {
+      // SQ276
+      this.state.estimatedDate = moment(this.state.estimatedDate, "DD MMM").format('Do MMM.')
     }
-    else {
-      let a = date_fns.parse(this.state.estimatedDate, 'ddLLL', new Date())
+    if (this.state.estimatedTime === "-") {
+      this.state.estimatedTime = this.state.scheduledTime
+    } else {
+      a = date_fns.parse(this.state.scheduledDatetime.slice(0,8) + " " +this.state.estimatedTime, "HH:mm", new Date())
+      this.state.estimatedTime = date_fns.format(a, 'h:mma')
     }
   }
 
@@ -88,21 +95,39 @@ export default class NewInfoPage extends Component {
     }
   }
 
+
+
   _handle_status() {
-    // 'Retimed', 'Cancelled', 'Landed', 'Confirmed'
+    /*
+
+    Last Call GOOD
+    Gate Open GOOD
+    Gate Closing GOOD
+    Departed GOOD
+    Boarding GOOD
+    New Gate GOOD
+    Landed GOOD
+    Retimed GOOD
+    Gate Closed GOOD
+    Confirmed GOOD
+    Cancelled GOOD
+    */
     text = this.state.status
-    if (this.state.status === 'Cancelled') {
+    if (['Cancelled', 'Gate Closed', 'Last Call', 'Departed'].includes(this.state.status)) { // departed is here b/c i'm assuming it means they missed their flight
       color_to_add = StyleSheet.create({placeholder: {color: "#8b0000"}}) // dark red
-    } else if (this.state.status === 'Landed') {
+    } else if (['Landed', 'Boarding', 'Gate Open'].includes(this.state.status)) {
       color_to_add = StyleSheet.create({placeholder: {color: "#048f04"}}) // dark green
-    } else if (this.state.status === 'Confirmed') {
+    } else if (['Confirmed'].includes(this.state.status)) {
       color_to_add = StyleSheet.create({placeholder: {color: "#876D56"}}) // brown
-    } else if (this.state.status === 'Retimed') {
+    } else if (['Retimed', 'New Gate', 'Gate Closing', 'Delayed'].includes(this.state.status)) {
       color_to_add = StyleSheet.create({placeholder: {color: "#c46c00"}}) // dark orange
-    } else if (this.state.status === '' || this.state.status === '-') {
-      color_to_add = StyleSheet.create({placeholder: {color: "grey"}}) // standard grey
+    } else if (['', '-'].includes(this.state.status)) {
+      color_to_add = StyleSheet.create({placeholder: {color: "#876D56"}}) // standard grey
       text = "No Status"
-    } 
+    } else { 
+      // this catches all statuses of type "Check Gate at 13:00"
+      color_to_add = StyleSheet.create({placeholder: {color: "#876D56", fontSize: 35}}) // standard grey
+    }
     return (
         <Text style={[styles.warning_text, color_to_add.placeholder]}>{text}</Text>
       )
@@ -307,7 +332,8 @@ const styles = StyleSheet.create({
     fontFamily: "NewYorkMedium-Bold",
     // color: "#8b0000",
     alignSelf: 'center',
-    marginTop: hp(1)
+    marginTop: hp(1),
+    textAlign: 'center'
   },
   luggage_text: {
     marginTop: hp(2),
