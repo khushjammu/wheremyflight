@@ -64,12 +64,11 @@ export default class NewInfoPage extends Component {
   _handle_scheduled_datetime() {
     console.log("original")
     console.log(this.state.scheduledDatetime)
-    let a = date_fns.parse(this.state.scheduledDatetime, 'yyyyMMdd HH:mm:ss', new Date())
-    // let a = moment(this.state.scheduledDatetime, "YYYYMMDD HH:mm:ss")
+    let parsedScheduledDatetime = date_fns.parse(this.state.scheduledDatetime, 'yyyyMMdd HH:mm:ss', new Date())
     console.log("parsed")
-    console.log(a)
-    this.state.scheduledDate = date_fns.format(a, 'Do MMM.')
-    this.state.scheduledTime = date_fns.format(a, 'h:mma')
+    console.log(parsedScheduledDatetime)
+    this.state.scheduledDate = date_fns.format(parsedScheduledDatetime, 'Do MMM.')
+    this.state.scheduledTime = date_fns.format(parsedScheduledDatetime, 'h:mma')
   }
 
   _handle_estimated_datetime() {
@@ -98,20 +97,6 @@ export default class NewInfoPage extends Component {
 
 
   _handle_status() {
-    /*
-
-    Last Call GOOD
-    Gate Open GOOD
-    Gate Closing GOOD
-    Departed GOOD
-    Boarding GOOD
-    New Gate GOOD
-    Landed GOOD
-    Retimed GOOD
-    Gate Closed GOOD
-    Confirmed GOOD
-    Cancelled GOOD
-    */
     text = this.state.status
     if (['Cancelled', 'Gate Closed', 'Last Call', 'Departed'].includes(this.state.status)) { // departed is here b/c i'm assuming it means they missed their flight
       color_to_add = StyleSheet.create({placeholder: {color: "#8b0000"}}) // dark red
@@ -122,11 +107,11 @@ export default class NewInfoPage extends Component {
     } else if (['Retimed', 'New Gate', 'Gate Closing', 'Delayed'].includes(this.state.status)) {
       color_to_add = StyleSheet.create({placeholder: {color: "#c46c00"}}) // dark orange
     } else if (['', '-'].includes(this.state.status)) {
-      color_to_add = StyleSheet.create({placeholder: {color: "#876D56"}}) // standard grey
+      color_to_add = StyleSheet.create({placeholder: {color: "#876D56"}}) // brown
       text = "No Status"
     } else { 
       // this catches all statuses of type "Check Gate at 13:00"
-      color_to_add = StyleSheet.create({placeholder: {color: "#876D56", fontSize: 35}}) // standard grey
+      color_to_add = StyleSheet.create({placeholder: {color: "#876D56", fontSize: 35}}) // brown
     }
     return (
         <Text style={[styles.warning_text, color_to_add.placeholder]}>{text}</Text>
@@ -229,7 +214,6 @@ const styles = StyleSheet.create({
     width: wp(100),
   },
   topRow: {
-    // flex: 1,
     flexDirection: "row",
     justifyContent: "center",
     marginTop: hp(8),
@@ -239,8 +223,6 @@ const styles = StyleSheet.create({
   search: {
   },
   search_Box_Rectangle: {
-    // height: hp(12),
-    // width: wp(60),
     backgroundColor: 'white',
     borderColor: 'white',
     borderWidth: 1,
@@ -280,13 +262,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
   },
   info: {
-    // alignItems: 'center',
     alignSelf: 'center',
     marginTop: hp(4),
     paddingTop: hp(3),
     paddingBottom: hp(1),
-    // paddingLeft: wp(5),
-    // height: hp(68.67),
     width: wp(65),
     borderWidth: 1,
     borderColor: "white",
@@ -330,7 +309,6 @@ const styles = StyleSheet.create({
   warning_text: {
     fontSize: 43,
     fontFamily: "NewYorkMedium-Bold",
-    // color: "#8b0000",
     alignSelf: 'center',
     marginTop: hp(1),
     textAlign: 'center'

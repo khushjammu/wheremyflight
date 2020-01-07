@@ -47,14 +47,11 @@ export default class Intro extends Component {
   }
 
   _onPress() {
-    // date_fns.format(this.state.date,"YYYYMMDD");
-
     if (this.state.text != "") {
       d = Date()
       if (this.state.date === "yesterday") {d = date_fns.endfYesterday()}
       if (this.state.date === "today") {d = date_fns.endOfToday()}
       if (this.state.date === "tomorrow") {d = date_fns.endOfTomorrow()}
-      // d_readable = console.log(date_fns.format(d, 'DD/MM'))
     var url ="http://api.wheremyflight.khushjammu.com:5000/get_flights?date=" +date_fns.format(d,"YYYYMMDD") +"&flight_code=" +this.state.text;
     // var url ="http://192.168.86.151:5000/get_flights?date=" +date_fns.format(d,"YYYYMMDD") +"&flight_code=" +this.state.text;
     console.log(url)
@@ -116,34 +113,11 @@ export default class Intro extends Component {
   _navigateToArrivals(res, flag, date){
     console.log(res);
     if (flag === 'arrival') {
-      // this.props.navigation.navigate("NewInfoPage", {
-      //   flight_num: this.state.text, 
-      //   origin: res['data']["arrival"]["from"],
-      //   destination: "Singapore",
-      //   terminal: "T" + res['data']["arrival"]["terminal"],
-      //   date: date_fns.format(date, 'DD/MM'),
-      //   arrival_time: res['data']["arrival"]["estimatedTime"] != "-" ? res['data']["arrival"]["estimatedTime"] : res['data']["arrival"]["scheduledTime"],
-      //   belt_no: res['data']["arrival"]["belt"],
-      //   status: res['data']["arrival"]["status"] != "-" ? res['data']["arrival"]["status"] : "Scheduled",
-      //   type: 'arrival'
-      // });
       console.log("redirecting to arrival")
-      this.props.navigation.navigate("NewInfoPage", res['data']['arrival']);
+      this.props.navigation.navigate("InfoPage", res['data']['arrival']);
     } else if (flag === 'departure') {
-      // this.props.navigation.navigate("NewInfoPage3", {
-      //   flight_num: this.state.text, 
-      //   origin: "Singapore",
-      //   destination: res['data']["departure"]["to"],
-      //   terminal: "T" + res['data']["departure"]["terminal"],
-      //   // date: new Intl.DateTimeFormat('en-GB', {month: "2-digit", day: "2-digit"}).format(new Date(res['data']["departure"]["scheduledDatetime"])),
-      //   date: date_fns.format(date, 'DD/MM'),
-      //   arrival_time: res['data']["departure"]["estimatedTime"] != "-" ? res['data']["departure"]["estimatedTime"] : res['data']["departure"]["scheduledTime"],
-      //   belt_no: res['data']["departure"]["gate"],
-      //   status: res['data']["departure"]["status"] != "-" ? res['data']["departure"]["status"] : "Scheduled",
-      //   type: 'departure'
-      // });
       console.log("redirecting to departure")
-      this.props.navigation.navigate("NewInfoPage", res['data']['departure'])
+      this.props.navigation.navigate("InfoPage", res['data']['departure'])
     }
   }
 
@@ -167,8 +141,6 @@ export default class Intro extends Component {
     return (
       <View style={styles.root}>
       <StatusBar hidden />
-      { /* <ImageBackground style={styles.background} source={require("../assets/Gradient_t9eqeMB.png")}> */ }
-
           <View style={styles.search}>
             <Text onLayout={(event) => this.handle_line_sizes(event)} style={styles.search_Box_Title}>Where my flight?</Text>
             {this.underline_title()}
@@ -189,7 +161,6 @@ export default class Intro extends Component {
               <Button
                 // no style prop passed b/c not needed
                 onPress={() => this._onPress()}
-                // onPress={() => {console.log(this.state)}}
               >
                 <SearchButtonSVG/> 
               </Button> 
@@ -208,32 +179,7 @@ export default class Intro extends Component {
               <Picker.Item label="Today" value="today" />
               <Picker.Item label="Tomorrow" value="tomorrow" />
             </Picker>
-            {/*
-            <DatePicker
-              style={styles.datepicker_datepickercomponent}
-              date={this.state.date}
-              mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              minDate= {this.state.minDate}
-              maxDate= {this.state.maxDate}
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              customStyles={{
-                dateText:{
-                  color: '#ffffff'
-                },
-                dateInput: {
-                  marginLeft: 36
-                }
-                // ... You can check the source to find the other keys.
-              }}
-              onDateChange={(date) => {this.setState({date: date})}}
-            />
-            */}
           </View>
-
-        { /* </ImageBackground> */ }
       </View>
     );
   }
@@ -253,15 +199,13 @@ const styles = StyleSheet.create({
     marginTop: hp(10), // use marginTop so that other components are affected: https://stackoverflow.com/questions/4036176/css-top-vs-margin-top
   },
   search_Box_Title: {
-    // color: "rgba(255,255,255,1)",
     color: "#876D56",
     fontSize: 36,
-    // fontFamily: "OpenSans-SemiBoldItalic",
     fontFamily: "NewYorkMedium-Regular",
     paddingBottom: hp(1)
   },
   line: {
-    borderBottomWidth: 1, // StyleSheet.hairlineWidth,
+    borderBottomWidth: 1, // StyleSheet.hairlineWidth is too thin for my liking
     borderColor: "#979797",
     marginBottom: hp(5)
   },
@@ -297,18 +241,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   datepicker_rectangle: {
-    // height: hp(1),
-    // width: wp(6),
     backgroundColor: 'white',
     borderColor: 'white',
     borderWidth: 1,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
-    // shadowColor: 'black',
-    // shadowOffset: { width: 0, height: 2 },
-    // shadowOpacity: 0.5,
-    // shadowRadius: 2,
     marginTop: hp(5)
   },
   datepicker_text: {
