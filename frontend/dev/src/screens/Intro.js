@@ -21,16 +21,15 @@ export default class Intro extends Component {
       maxDate: date_fns.format(date_fns.endOfTomorrow(), 'YYYY-MM-DD'),
       appState: AppState.currentState,
     };
-    this._setDate = this._setDate.bind(this);
     this.myRef = React.createRef();  
   }
 
-  handle_line_sizes(event) {
+  handle_line_sizes = (event) => {
     var {x, y, width, height} = event.nativeEvent.layout;
     this.setState({ title_width: width, ready: true });
   }
 
-  underline_title() {
+  underline_title = () => {
     if (!this.state.ready) {
       return (
         <View/>
@@ -42,11 +41,11 @@ export default class Intro extends Component {
     }
   }
 
-  _setDate(newDate) {
+  _setDate = (newDate) => {
     this.setState({ date: newDate });
   }
 
-  _onPress() {
+  _onPress = () => {
     if (this.state.text != "") {
       d = Date()
       if (this.state.date === "yesterday") {d = date_fns.endfYesterday()}
@@ -110,7 +109,7 @@ export default class Intro extends Component {
     }
   }
 
-  _navigateToArrivals(res, flag, date){
+  _navigateToArrivals = (res, flag, date) => {
     console.log(res);
     if (flag === 'arrival') {
       console.log("redirecting to arrival")
@@ -121,11 +120,11 @@ export default class Intro extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     AppState.addEventListener('change', this._handleAppStateChange);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
@@ -137,7 +136,7 @@ export default class Intro extends Component {
     }
   }
 
-  render() {
+  render = () => {
     return (
       <View style={styles.root}>
       <StatusBar hidden />

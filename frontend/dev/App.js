@@ -37,7 +37,6 @@ export default class App extends React.Component {
   }
 
   async loadResources() {
-    require('./src/assets/Gradient_t9eqeMB.png')
     await Font.loadAsync({
       "OpenSans-SemiBold": require("./src/assets/fonts/OpenSans-SemiBold.ttf"),
       "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),

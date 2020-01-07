@@ -9,7 +9,6 @@ import moment from 'moment';
 
 
 import Icon from "../libraries/icon.js";
-import PaperPlaneSVG from "../symbols/PaperPlane";
 
 
 export default class NewInfoPage extends Component {
@@ -55,13 +54,12 @@ export default class NewInfoPage extends Component {
     this._handle_scheduled_datetime()
     this._handle_estimated_datetime()
     this._handle_luggage_belt()
-    this._arrival_or_departure()
     console.log("post-date processing state")
     console.log(this.state)
   }
 
 
-  _handle_scheduled_datetime() {
+  _handle_scheduled_datetime = () => {
     console.log("original")
     console.log(this.state.scheduledDatetime)
     let parsedScheduledDatetime = date_fns.parse(this.state.scheduledDatetime, 'yyyyMMdd HH:mm:ss', new Date())
@@ -71,7 +69,7 @@ export default class NewInfoPage extends Component {
     this.state.scheduledTime = date_fns.format(parsedScheduledDatetime, 'h:mma')
   }
 
-  _handle_estimated_datetime() {
+  _handle_estimated_datetime = () => {
     if (this.state.estimatedDate === "-") {
       this.state.estimatedDate = this.state.scheduledDate
     } else {
@@ -86,7 +84,7 @@ export default class NewInfoPage extends Component {
     }
   }
 
-  _arrival_or_departure() {
+  _arrival_or_departure = () => {
     if (this.state.from === "Singapore") {
       return "Departure"
     } else {
@@ -96,7 +94,7 @@ export default class NewInfoPage extends Component {
 
 
 
-  _handle_status() {
+  _handle_status = () => {
     text = this.state.status
     if (['Cancelled', 'Gate Closed', 'Last Call', 'Departed'].includes(this.state.status)) { // departed is here b/c i'm assuming it means they missed their flight
       color_to_add = StyleSheet.create({placeholder: {color: "#8b0000"}}) // dark red
@@ -118,7 +116,7 @@ export default class NewInfoPage extends Component {
       )
   }
 
-  _handle_luggage_belt() {
+  _handle_luggage_belt = () => {
     if (this._arrival_or_departure() === "Arrival") {
       if (this.state.belt === "NO-ID" || this.state.belt === "-") {
         return (
@@ -142,7 +140,7 @@ export default class NewInfoPage extends Component {
     
   }
 
-  render() {
+  render = () => {
     return (
       <View style={styles.root}>
 
