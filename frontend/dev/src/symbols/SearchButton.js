@@ -5,7 +5,7 @@ import Svg, { Defs, Circle, G, Use, Path, Polygon } from 'react-native-svg'
 const SearchButtonSVG = props => (
   <Svg width={51} height={51} viewBox="0 0 51 51" {...props}>
     <Defs>
-      <Circle id="path-1" cx={21.5} cy={21.5} r={21.5} />
+      <Circle id="path-1" cx={21.5} cy={21.5} r={21.5} stroke="white"/>
     </Defs>
     <G id="interation-4" fill="none" fillRule="evenodd">
       <G id="intro-w/-keyboard" transform="translate(-162 -221)">

@@ -7,11 +7,13 @@ import * as Font from 'expo-font'
 
 import Intro from "./src/screens/Intro";
 import InfoPage from "./src/screens/InfoPage"
+import NewInfoPage from "./src/screens/NewInfoPage"
 
 const StackNavigation = createStackNavigator(
   {
     Intro: Intro,
-    InfoPage: InfoPage
+    InfoPage: InfoPage,
+    NewInfoPage: NewInfoPage
   },
   {
     initialRouteName: "Intro",
@@ -43,7 +45,9 @@ export default class App extends React.Component {
       "OpenSans-SemiBoldItalic": require("./src/assets/fonts/OpenSans-SemiBoldItalic.ttf"),
       "OpenSans-Regular": require("./src/assets/fonts/OpenSans-Regular.ttf"),
       "NewYorkMedium-Regular": require("./src/assets/fonts/NewYorkMedium-Regular.otf"),
-      "NewYorkMedium-RegularItalic": require("./src/assets/fonts/NewYorkMedium-RegularItalic.otf")
+      "NewYorkMedium-RegularItalic": require("./src/assets/fonts/NewYorkMedium-RegularItalic.otf"),
+      "NewYorkMedium-RegularItalic": require("./src/assets/fonts/NewYorkMedium-RegularItalic.otf"),
+      "NewYorkMedium-Bold": require("./src/assets/fonts/NewYorkMedium-Bold.otf")
     });
 
     this.setState({ fontLoaded: true });

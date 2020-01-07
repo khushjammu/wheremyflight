@@ -24,6 +24,7 @@ export default class InfoPage extends Component {
       status: this.props.navigation.getParam("status","NO-STAT"),
       type: this.props.navigation.getParam("type","NO-TYPE")
     }
+    console.log(this.state)
   }
 
   handleStatus() {
