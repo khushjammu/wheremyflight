@@ -6,12 +6,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import * as Font from 'expo-font'
 
 import Intro from "./src/screens/Intro";
-import NewInfoPage from "./src/screens/NewInfoPage"
+import InfoPage from "./src/screens/InfoPage"
 
 const StackNavigation = createStackNavigator(
   {
     Intro: Intro,
-    NewInfoPage: NewInfoPage
+    InfoPage: InfoPage
   },
   {
     initialRouteName: "Intro",
