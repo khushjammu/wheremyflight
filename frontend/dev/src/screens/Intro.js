@@ -16,7 +16,6 @@ export default class Intro extends Component {
     this.state = {
       ready: false,
       text: "", 
-      // date: new Date(), 
       date: "today",
       minDate: date_fns.format(date_fns.endOfYesterday(), 'YYYY-MM-DD'),
       maxDate: date_fns.format(date_fns.endOfTomorrow(), 'YYYY-MM-DD'),
@@ -56,8 +55,8 @@ export default class Intro extends Component {
       if (this.state.date === "today") {d = date_fns.endOfToday()}
       if (this.state.date === "tomorrow") {d = date_fns.endOfTomorrow()}
       // d_readable = console.log(date_fns.format(d, 'DD/MM'))
-    // var url ="http://api.wheremyflight.khushjammu.com:5000/get_flights?date=" +date_fns.format(d,"YYYYMMDD") +"&flight_code=" +this.state.text;
-    var url ="http://192.168.86.151:5000/get_flights?date=" +date_fns.format(d,"YYYYMMDD") +"&flight_code=" +this.state.text;
+    var url ="http://api.wheremyflight.khushjammu.com:5000/get_flights?date=" +date_fns.format(d,"YYYYMMDD") +"&flight_code=" +this.state.text;
+    // var url ="http://192.168.86.151:5000/get_flights?date=" +date_fns.format(d,"YYYYMMDD") +"&flight_code=" +this.state.text;
     console.log(url)
       fetch(url)
         .then(res => res.json())
