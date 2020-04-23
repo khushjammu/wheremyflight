@@ -9,7 +9,7 @@
       "android",
       "web"
     ],
-    "version": "1.0.1", // mandatory for iOS building - increment each build
+    "version": "2.0.0", // mandatory for iOS building - increment each build
     "orientation": "portrait",
     "icon": "./src/assets/icon/Icon.png", // mandatory for iOS building 
     "splash": {

@@ -10,7 +10,7 @@ frontend:
 - currently, i suspect that the date logic is a bit convoluted and is missing a lot of the edge cases. should do some rigourous testing by dumping the flights for three days straight and make sure all conditions are solid
 - code is like spaghetti -- refactor & clean it
 - unit tests?
-- migrate to ES6 function declarations
+- ESlint
 
 backend:
 - parallel processing to speed up flight finding?
